@@ -24,9 +24,10 @@ class WrapperController extends Controller
 
     }
 
-    public function  allLeagueEntries($queue,$tier,$division, Request $request){
+    public function  allLeagueEntries($queue,$tier,$division, Request $request, $pge){
         $page = $request->api_key;
-        $json = Http::get('https://na1.api.riotgames.com/lol/league/v4/entries/'.$queue.'/'.$tier.'/'.$division.'?'.$page.'&api_key=RGAPI-172fdc39-fb5d-47f9-b9b4-f49668b2eecd')->json();
+        $pges = $pge->page;
+        $json = Http::get('https://na1.api.riotgames.com/lol/league/v4/entries/'.$queue.'/'.$tier.'/'.$division.'?'.$pges.'&api_key='.$page)->json();
         return response()->json($json);
     }
 
